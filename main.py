@@ -1,4 +1,7 @@
+#!/usr/bin/env/ python
+
 import re
+import fileinput
 
 comparison_string = re.compile(r"^\$(.+):(.+)", re.M)
 
@@ -9,4 +12,4 @@ def processString(string):
         print(key, value)
     return
 
-processString("$Hello:World\n$Goodbye:Universe")
+processString("$Test:Works")
