@@ -3,16 +3,19 @@
 import re
 import sys
 
-var_string = re.compile(r"^(\$.+):(.+)", re.M)
-end_of_vars = re.compile("----")
+text_sub_regex = re.compile(r"^(\$.+):(.+)", re.M)
+header_end_regex = re.compile("----")
 
-def processString(string):
-    last_var_pos = end_of_vars.search(string).end()
-    groups = var_string.findall(string, 0, last_var_pos)
-    string = string[last_var_pos:]
-    for (key, value) in groups:
-        string = string.replace(key, value)
-    print(string)
+def processString(working_string):
+    header_end_position = header_end_regex.search(working_string).end()
+    text_sub_groups = text_sub_regex.findall(working_string, 0, header_end_position)
+    working_string = working_string[header_end_position:]
+    for (key, value) in text_sub_groups:
+        working_string = working_string.replace(key, value)
+    #for num, character in enumerate(working_string):
+    #    if  character == "*":
+    #        working_string = working_string[:num]+"[b]"+working_string[num+1:]
+    print(working_string)
     return
 
 with open(sys.argv[1]) as file:
