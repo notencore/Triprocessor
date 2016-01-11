@@ -1,12 +1,16 @@
-import re
+#!/usr/bin/env/ python
 
-comparison_string = re.compile(r"^\$(.+):(.+)", re.M)
+import re
+import sys
+
+var_string = re.compile(r"^\$(.+):(.+)", re.M)
+end_of_vars = re.compile("----")
 
 def processString(string):
     #God I hate four tabs.
-    groups = comparison_string.findall(string)
+    groups = var_string.findall(string, 0, end_of_vars.search(string).start())
     for (key, value) in groups:
         print(key, value)
     return
-
-processString("$Hello:World\n$Goodbye:Universe")
+with open(sys.argv[1]) as file:
+    processString(file.read())
