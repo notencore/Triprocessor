@@ -7,7 +7,6 @@ class singleProcessor:
         self.final = final
     
     def processMarkup(self, original_string):
-        print(self.replaced_symbol)
         working_string = ""
         head = 0
         for num, character in enumerate(original_string):
