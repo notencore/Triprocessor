@@ -1,6 +1,6 @@
 import re
 
-text_sub_regex = re.compile(r"^(\$.+):(.+)", re.M)
+text_sub_regex = re.compile(r"^(\$.+) ?: ?(.+)+$", re.M)
 header_end_regex = re.compile("----")
 
 def substituteStrings(working_string):
@@ -9,5 +9,5 @@ def substituteStrings(working_string):
                                              header_end_position)
     working_string = working_string[header_end_position+1:]
     for (key, value) in text_sub_groups:
-        working_string = working_string.replace(key, value)
+        working_string = re.sub("(?<!\\\\)\\"+key, value, working_string)
     return working_string
