@@ -1,4 +1,4 @@
 # Triprocessor
 A text preprocessor for text, not just code.
 
-Stable Release 0.2
+Stable Release 0.3
